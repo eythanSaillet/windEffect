@@ -16,7 +16,7 @@ nav{
 }
 nav a{
   text-decoration: none;
-  font-size: 1600%;
+  font-size: 11vw;
   font-family: 'Righteous', cursive;
   padding: 20px;
   color: black;
@@ -26,5 +26,5 @@ nav a{
 }
 
 nav a span{
-  pointer-events: none;
+  /* pointer-events: none; */
 }

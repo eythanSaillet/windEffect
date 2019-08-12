@@ -1,44 +1,55 @@
-ceramicTab = document.querySelectorAll('.ceramic span')
-ceramicMid = Math.floor(ceramicTab.length/2)
-console.log(ceramicTab,ceramicMid);
-
-ceramic = document.querySelector('.ceramic')
-
-let trigger = true
-let staggerTranslateX = 0
-let staggerTranslateY = 0
-// let hey = new TimelineMax()
-ceramic.addEventListener('mouseover',function(){
-    console.log(event.movementY,event.movementX)
-    if(trigger == true){
-        trigger = false
+word = document.querySelector('.word')
+wordTab = document.querySelectorAll('.word span')
+let tab = []
+let wordTrigger = true
+let spanTrigger = true
+let letter
+let staggerFrom
+wordTab.forEach(function(e) {
+    tab.push(e.innerHTML)
+    e.addEventListener('mouseover',function(){
+        if(spanTrigger == true){
+            spanTrigger = false
+            letter = e.innerHTML
+            staggerFrom = tab.indexOf(letter)
+            console.log(staggerFrom)
+            setTimeout(function(){
+                spanTrigger = true
+            },1000)
+        }
+    })
+  })
+word.addEventListener('mouseover',function(){
+    if(wordTrigger == true){
+        wordTrigger = false
         setTimeout(function(){
-            trigger = true
-        },00)
-        TweenMax.staggerTo(ceramicTab, 0.5, {
-            y: event.movementY*3,
-            x: event.movementX*3,
+            wordTrigger = true
+        },1000)
+        
+        TweenMax.staggerTo(wordTab, 0.5, {
+            y: event.movementY*3.5,
+            x: event.movementX*3.5,
             color: "#FFFFFF",
             ease: Power1.easeInOut,
             stagger: {
-                from: ceramicMid,
-                amount: 0.3
+                from: staggerFrom,
+                amount: 0.4
             }
         });
         setTimeout(
             function(){
-                TweenMax.staggerTo(ceramicTab, 0.5, {
+                TweenMax.staggerTo(wordTab, 0.5, {
                     y: 0,
                     x: 0,
                     color: "#000000",
                     ease: Power1.easeInOut,
                     stagger: {
-                        from: ceramicMid,
-                        amount: 0.3
+                        from: staggerFrom,
+                        amount: 0.4
                     }
                 });
             }
-            ,400
+            ,500
         )
     } 
 })
